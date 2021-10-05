@@ -18,7 +18,7 @@ class UI(QMainWindow):
         self.pushButton_8.clicked.connect(lambda : self.writeXO(self.pushButton_8))
         self.pushButton_9.clicked.connect(lambda : self.writeXO(self.pushButton_9))
         self.start_over_button.clicked.connect(self.reset)
-
+        
         self.show()
 
     def writeXO(self, button):
@@ -28,6 +28,7 @@ class UI(QMainWindow):
         else:
             button.setText("O")
         
+        button.setEnabled(False)
         self.counter += 1
 
 
@@ -37,7 +38,9 @@ class UI(QMainWindow):
 
         for button in buttons:
             button.setText("")
-
+            button.setEnabled(True)
+        
+        self.counter = 0
 
 if __name__ == "__main__":
     import sys
