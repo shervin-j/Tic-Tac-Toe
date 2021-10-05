@@ -24,10 +24,12 @@ class UI(QMainWindow):
     def writeXO(self, button):
         if self.counter % 2 == 0: 
             button.setText("X")
+            self.label.setText("O's turn")
         
         else:
             button.setText("O")
-        
+            self.label.setText("X's turn")
+
         button.setEnabled(False)
         self.counter += 1
 
