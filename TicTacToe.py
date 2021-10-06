@@ -6,7 +6,11 @@ import sys
 class UI(QMainWindow):
     def __init__(self):
         super(UI, self).__init__()
+        
+        # Loading UI
         uic.loadUi("TicTacToe.ui", self)
+        
+        # Button clicking
         self.counter = 0
         self.pushButton_1.clicked.connect(lambda : self.writeXO(self.pushButton_1))
         self.pushButton_2.clicked.connect(lambda : self.writeXO(self.pushButton_2))
@@ -18,6 +22,7 @@ class UI(QMainWindow):
         self.pushButton_8.clicked.connect(lambda : self.writeXO(self.pushButton_8))
         self.pushButton_9.clicked.connect(lambda : self.writeXO(self.pushButton_9))
         self.start_over_button.clicked.connect(self.reset)
+        
         self.show()
 
 
@@ -37,6 +42,7 @@ class UI(QMainWindow):
 
     def wincheck(self):
         is_win = False
+        
         # Row
         if self.pushButton_1.text() != "" and self.pushButton_1.text() == self.pushButton_2.text() == self.pushButton_3.text():
             self.win(self.pushButton_1, self.pushButton_2, self.pushButton_3)
@@ -88,7 +94,7 @@ class UI(QMainWindow):
         for button in buttons:
             button.setEnabled(False)
 
-        self.label.setText(f"{button1.text()} Win!")
+        self.label.setText(f"{button1.text()} Wins!")
 
     
     def reset(self):
