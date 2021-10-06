@@ -31,37 +31,50 @@ class UI(QMainWindow):
             self.label.setText("X's turn")
 
         button.setEnabled(False)
-        self.wincheck()
         self.counter += 1
+        self.wincheck()
 
 
     def wincheck(self):
+        is_win = False
         # Row
         if self.pushButton_1.text() != "" and self.pushButton_1.text() == self.pushButton_2.text() == self.pushButton_3.text():
             self.win(self.pushButton_1, self.pushButton_2, self.pushButton_3)
+            is_win = True
         
         elif self.pushButton_4.text() != "" and self.pushButton_4.text() == self.pushButton_5.text() == self.pushButton_6.text():
             self.win(self.pushButton_4, self.pushButton_5, self.pushButton_6)
+            is_win = True
         
         elif self.pushButton_7.text() != "" and self.pushButton_7.text() == self.pushButton_8.text() == self.pushButton_9.text():
             self.win(self.pushButton_7, self.pushButton_8, self.pushButton_9)
+            is_win = True
         
         # column
         elif self.pushButton_1.text() != "" and self.pushButton_1.text() == self.pushButton_4.text() == self.pushButton_7.text():
             self.win(self.pushButton_1, self.pushButton_4, self.pushButton_7)
+            is_win = True
         
         elif self.pushButton_2.text() != "" and self.pushButton_2.text() == self.pushButton_5.text() == self.pushButton_8.text():
             self.win(self.pushButton_2, self.pushButton_5, self.pushButton_8)
+            is_win = True
         
         elif self.pushButton_3.text() != "" and self.pushButton_3.text() == self.pushButton_6.text() == self.pushButton_9.text():
             self.win(self.pushButton_3, self.pushButton_6, self.pushButton_9)
+            is_win = True
         
         # diagonal
         elif self.pushButton_1.text() != "" and self.pushButton_1.text() == self.pushButton_5.text() == self.pushButton_9.text():
             self.win(self.pushButton_1, self.pushButton_5, self.pushButton_9)
+            is_win = True
 
         elif self.pushButton_3.text() != "" and self.pushButton_3.text() == self.pushButton_5.text() == self.pushButton_7.text():
             self.win(self.pushButton_3, self.pushButton_5, self.pushButton_7)
+            is_win = True
+        
+        # Tie
+        if (not is_win) and self.counter == 9:
+            self.label.setText("Tie!")  
 
         
     def win(self, button1, button2, button3):
