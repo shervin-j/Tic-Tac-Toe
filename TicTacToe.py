@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication
-from PyQt5 import uic
+from PyQt5 import uic, QtGui
 import sys
 
 
@@ -115,4 +115,6 @@ if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)
     ui = UI()
+    ui.setWindowTitle("Tic-Tac-Toe")
+    ui.setWindowIcon(QtGui.QIcon("icon.png"))
     sys.exit(app.exec_())
