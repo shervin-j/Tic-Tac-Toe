@@ -89,6 +89,7 @@ class UI(QMainWindow):
                                 "QPushButton::pressed{background-color: rgb(255, 201, 71); color: rgb(10, 25, 49);}")
         
         self.counter = 0
+        self.label.setText("X's turn")
 
 
 if __name__ == "__main__":
