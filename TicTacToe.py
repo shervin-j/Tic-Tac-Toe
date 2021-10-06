@@ -18,8 +18,8 @@ class UI(QMainWindow):
         self.pushButton_8.clicked.connect(lambda : self.writeXO(self.pushButton_8))
         self.pushButton_9.clicked.connect(lambda : self.writeXO(self.pushButton_9))
         self.start_over_button.clicked.connect(self.reset)
-        
         self.show()
+
 
     def writeXO(self, button):
         if self.counter % 2 == 0: 
@@ -31,9 +31,53 @@ class UI(QMainWindow):
             self.label.setText("X's turn")
 
         button.setEnabled(False)
+        self.wincheck()
         self.counter += 1
 
 
+    def wincheck(self):
+        # Row
+        if self.pushButton_1.text() != "" and self.pushButton_1.text() == self.pushButton_2.text() == self.pushButton_3.text():
+            self.win(self.pushButton_1, self.pushButton_2, self.pushButton_3)
+        
+        elif self.pushButton_4.text() != "" and self.pushButton_4.text() == self.pushButton_5.text() == self.pushButton_6.text():
+            self.win(self.pushButton_4, self.pushButton_5, self.pushButton_6)
+        
+        elif self.pushButton_7.text() != "" and self.pushButton_7.text() == self.pushButton_8.text() == self.pushButton_9.text():
+            self.win(self.pushButton_7, self.pushButton_8, self.pushButton_9)
+        
+        # column
+        elif self.pushButton_1.text() != "" and self.pushButton_1.text() == self.pushButton_4.text() == self.pushButton_7.text():
+            self.win(self.pushButton_1, self.pushButton_4, self.pushButton_7)
+        
+        elif self.pushButton_2.text() != "" and self.pushButton_2.text() == self.pushButton_5.text() == self.pushButton_8.text():
+            self.win(self.pushButton_2, self.pushButton_5, self.pushButton_8)
+        
+        elif self.pushButton_3.text() != "" and self.pushButton_3.text() == self.pushButton_6.text() == self.pushButton_9.text():
+            self.win(self.pushButton_3, self.pushButton_6, self.pushButton_9)
+        
+        # diagonal
+        elif self.pushButton_1.text() != "" and self.pushButton_1.text() == self.pushButton_5.text() == self.pushButton_9.text():
+            self.win(self.pushButton_1, self.pushButton_5, self.pushButton_9)
+
+        elif self.pushButton_3.text() != "" and self.pushButton_3.text() == self.pushButton_5.text() == self.pushButton_7.text():
+            self.win(self.pushButton_3, self.pushButton_5, self.pushButton_7)
+
+        
+    def win(self, button1, button2, button3):
+        button1.setStyleSheet("QPushButton{background-color:rgb(10, 25, 49); color:rgb(255, 73, 122);}")
+        button2.setStyleSheet("QPushButton{background-color:rgb(10, 25, 49); color:rgb(255, 73, 122);}")
+        button3.setStyleSheet("QPushButton{background-color:rgb(10, 25, 49); color:rgb(255, 73, 122);}")
+
+        buttons = [self.pushButton_1, self.pushButton_2, self.pushButton_3, self.pushButton_4, self.pushButton_5,
+                    self.pushButton_6, self.pushButton_7, self.pushButton_8, self.pushButton_9]
+
+        for button in buttons:
+            button.setEnabled(False)
+
+        self.label.setText(f"{button1.text()} Win!")
+
+    
     def reset(self):
         buttons = [self.pushButton_1, self.pushButton_2, self.pushButton_3, self.pushButton_4, self.pushButton_5,
                     self.pushButton_6, self.pushButton_7, self.pushButton_8, self.pushButton_9]
@@ -41,8 +85,11 @@ class UI(QMainWindow):
         for button in buttons:
             button.setText("")
             button.setEnabled(True)
+            button.setStyleSheet("QPushButton{background-color: rgb(10, 25, 49); color: rgb(255, 201, 71);}\n"
+                                "QPushButton::pressed{background-color: rgb(255, 201, 71); color: rgb(10, 25, 49);}")
         
         self.counter = 0
+
 
 if __name__ == "__main__":
     import sys
